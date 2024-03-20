@@ -88,7 +88,16 @@ describe('[integration testing] bundler should ', () => {
       )
     ).resolves;
 
-  })
+  });
+
+  test('should be able to bundle v3 files', async () => {
+    const files = ['./tests/v3/main.yaml']
+    const response = await bundle(
+        files.map(file => fs.readFileSync(path.resolve(process.cwd(), file), 'utf-8'))
+    )
+    const expected = fs.readFileSync(path.resolve(process.cwd(), './tests/v3/bundled.yaml'), 'utf-8');
+    expect(response.yml()).toBe(expected);
+  });
 });
 
 describe('[unit testing]', () => {

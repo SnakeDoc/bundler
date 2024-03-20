@@ -1,0 +1,32 @@
+asyncapi: 3.0.0
+info:
+  $ref: './tests/v3/info.yaml#/info'
+channels:
+  userSignedup:
+    address: 'user/signedup'
+    messages:
+      userSignedUpMessage:
+        $ref: './tests/v3/messages.yaml#/messages/UserSignedUp'
+  test:
+    address: '/test'
+    messages:
+      testMessage:
+        $ref: '#/components/messages/TestMessage'
+operations:
+  UserSignedUp:
+    action: send
+    channel:
+      $ref: '#/channels/userSignedup'
+    messages:
+      - $ref: './tests/v3/messages.yaml#/messages/UserSignedUp'
+  TestOpp:
+    action: send
+    channel:
+      $ref: '#/channels/test'
+    messages:
+      - $ref: '#/components/messages/TestMessage'
+components:
+  messages:
+    TestMessage:
+      payload:
+        type: string
