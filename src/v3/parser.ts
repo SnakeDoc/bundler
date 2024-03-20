@@ -98,8 +98,8 @@ export async function resolveV3Document(asyncapiDocuments: AsyncAPIObject[]) {
   const docs = [];
   for (const asyncapiDocument of asyncapiDocuments) {
     await parse(asyncapiDocument);
-    //const bundledAsyncAPIDocument = await $RefParser.bundle(asyncapiDocument)
-    docs.push(asyncapiDocument);
+    const bundledAsyncAPIDocument = await $RefParser.bundle(asyncapiDocument);
+    docs.push(bundledAsyncAPIDocument);
   }
   return docs; 
 }
